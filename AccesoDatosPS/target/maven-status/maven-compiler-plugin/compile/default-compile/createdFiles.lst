@@ -1,0 +1,7 @@
+entidades\CitaPaciente_.class
+jpaControllers\exceptions\IllegalOrphanException.class
+jpaControllers\exceptions\PreexistingEntityException.class
+jpaControllers\CitaPacienteJpaController.class
+entidades\CitaPaciente.class
+jpaControllers\exceptions\NonexistentEntityException.class
+com\itson\edu\mx\accesodatosps\AccesoDatosPS.class

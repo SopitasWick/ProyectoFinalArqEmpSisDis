@@ -1,0 +1,6 @@
+jpaControllers\CedulaProfesionalJpaController.class
+jpaControllers\exceptions\IllegalOrphanException.class
+jpaControllers\exceptions\PreexistingEntityException.class
+com\itson\edu\mx\accesodatoscedula\AccesoDatosCedula.class
+jpaControllers\exceptions\NonexistentEntityException.class
+entidades\CedulaProfesional.class
