@@ -1,0 +1,5 @@
+filtro\AuthenticationFilter.class
+modelos\LoginRequest.class
+recursos\LoginRecurso.class
+recursos\RestResource.class
+jwt\TokenResponse.class
