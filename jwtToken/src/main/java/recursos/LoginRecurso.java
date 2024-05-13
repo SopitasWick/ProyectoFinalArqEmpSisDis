@@ -1,6 +1,5 @@
 package recursos;
 
-import modelos.*;
 import jwt.TokenResponse;
 import jakarta.annotation.security.PermitAll;
 import jakarta.ws.rs.Consumes;
@@ -10,6 +9,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import modelos.LoginRequest;
+import tareaProgramada.notificacionAcceso;
 
 @Path("login")
 public class LoginRecurso {
@@ -20,10 +20,9 @@ public class LoginRecurso {
     @PermitAll
     public Response login(LoginRequest loginRequest) {
         if (isValidCredentials(loginRequest.getUsername(), loginRequest.getPassword())) {
-            System.out.println("111"+loginRequest.getUsername());
             String token = TokenResponse.generateToken(loginRequest.getUsername());
-            System.out.println("tokennn"+token);
-            String jsonResponse = "{\"token\": \"" + token + "\"}";
+            String jsonResponse = "{\"token\": \"" + token + "\", \"notificacion\": \"" + notificacionAcceso.ejecutarTareaPrueba() +"\" }";
+            
             return Response.ok(jsonResponse).build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED)
@@ -35,6 +34,6 @@ public class LoginRecurso {
 
     private boolean isValidCredentials(String username, String password) {
         // Validar las credenciales
-        return username.equals("usuario") && password.equals("contraseña");
+        return username.equals("usuario") && password.equals("contra");
     }
 }

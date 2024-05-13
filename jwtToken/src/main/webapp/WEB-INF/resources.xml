@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="conexion" type="javax.sql.DataSource">#Sun May 12 20:20:48 MST 2024
+jdbcDriver=com.mysql.cj.jdbc.Driver
+jdbcUrl=jdbc\:mysql\://localhost\:3306/sistemacita?zeroDateTimeBehavior\=CONVERT_TO_NULL&amp;serverTimezone\=America/Denver
+password=
+userName=root
+</Resource>
+</resources>

@@ -21,10 +21,16 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
                 }
             })
             .then(data => {
-                console.log('Login successful');
+                console.log('Respuesta del servidor:', data); // Agregamos este log para verificar la respuesta del servidor
                 localStorage.setItem('token', data.token); // Guarda el token en localStorage
                 showMessage('Inicio de sesión exitoso', true);
                 document.getElementById('logoutButton').style.display = 'inline'; // Muestra el botón de cerrar sesión
+                if (data.notificacion === "true") {
+                    alert("El día de hoy hay una cita pendiente. Se requiere confirmar el acceso para el expediente.");
+                    localStorage.setItem('notificacion', data.notificacion); // Guarda el token en localStorage
+                } else {
+                }
+
                 clearForm();
             })
             .catch(error => {
@@ -34,7 +40,8 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
 });
 
 document.getElementById('logoutButton').addEventListener('click', function () {
-    localStorage.removeItem('token'); // Elimina el token de localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('notificacion');
     showMessage('Cierre de sesión exitoso', true);
     document.getElementById('logoutButton').style.display = 'none';
     clearForm();
@@ -93,6 +100,61 @@ document.getElementById('postButton').addEventListener('click', function () {
         showMessage('Token no disponible. Inicia sesión primero.', false);
     }
 });
+
+document.getElementById('putButton').addEventListener('click', function () {
+    let token = localStorage.getItem('token');
+    if (token) {
+        fetch('api/recurso', {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch resource');
+                    }
+                })
+                .then(data => {
+                    console.log('PUT Recurso successful:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    } else {
+        showMessage('Token no disponible. Inicia sesión primero.', false);
+    }
+});
+
+document.getElementById('deleteButton').addEventListener('click', function () {
+    let token = localStorage.getItem('token');
+    if (token) {
+        fetch('api/recurso', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch resource');
+                    }
+                })
+                .then(data => {
+                    console.log('DELETE Recurso successful:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    } else {
+        showMessage('Token no disponible. Inicia sesión primero.', false);
+    }
+});
+
 
 function showMessage(message, isSuccess) {
     let messageElement = document.getElementById('message');
