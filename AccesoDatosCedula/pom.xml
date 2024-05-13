@@ -41,6 +41,11 @@
             <artifactId>jakarta.persistence</artifactId>
             <version>2.2.3</version>
         </dependency>
+        <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.28</version> <!-- La versión puede variar, asegúrate de usar la última estable -->
+    </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
