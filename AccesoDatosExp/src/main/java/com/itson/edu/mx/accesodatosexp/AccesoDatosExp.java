@@ -13,6 +13,7 @@ import jpaControllers.ConsultaJpaController;
 public class AccesoDatosExp {
 
 //    public static void main(String[] args) {
-//      ConsultaJpaController jpa = new ConsultaJpaController();
-//    }
+//  ConsultaJpaController jpa = new ConsultaJpaController();
+//   System.out.println(jpa.getConsultaCount());
+//  }
 }

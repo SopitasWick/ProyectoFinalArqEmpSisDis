@@ -6,16 +6,14 @@ package jpaControllers;
 
 import com.itson.edu.mx.entidades.CitaPaciente;
 import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import com.itson.edu.mx.entidades.Medico;
-import com.itson.edu.mx.entidades.Paciente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import jpaControllers.exceptions.NonexistentEntityException;
 import jpaControllers.exceptions.PreexistingEntityException;
 
@@ -26,7 +24,7 @@ import jpaControllers.exceptions.PreexistingEntityException;
 public class CitaPacienteJpaController implements Serializable {
 
     public CitaPacienteJpaController() {
-        this.emf=Persistence.createEntityManagerFactory("sistemaCitaPU");
+        this.emf = Persistence.createEntityManagerFactory("sistemaCitaPU");
     }
     private EntityManagerFactory emf = null;
 
@@ -39,25 +37,7 @@ public class CitaPacienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Medico idMedico = citaPaciente.getIdMedico();
-            if (idMedico != null) {
-                idMedico = em.getReference(idMedico.getClass(), idMedico.getIdMedico());
-                citaPaciente.setIdMedico(idMedico);
-            }
-            Paciente idPaciente = citaPaciente.getIdPaciente();
-            if (idPaciente != null) {
-                idPaciente = em.getReference(idPaciente.getClass(), idPaciente.getIdPaciente());
-                citaPaciente.setIdPaciente(idPaciente);
-            }
             em.persist(citaPaciente);
-            if (idMedico != null) {
-                idMedico.getCitaPacienteList().add(citaPaciente);
-                idMedico = em.merge(idMedico);
-            }
-            if (idPaciente != null) {
-                idPaciente.getCitaPacienteList().add(citaPaciente);
-                idPaciente = em.merge(idPaciente);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findCitaPaciente(citaPaciente.getIdCita()) != null) {
@@ -76,36 +56,7 @@ public class CitaPacienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CitaPaciente persistentCitaPaciente = em.find(CitaPaciente.class, citaPaciente.getIdCita());
-            Medico idMedicoOld = persistentCitaPaciente.getIdMedico();
-            Medico idMedicoNew = citaPaciente.getIdMedico();
-            Paciente idPacienteOld = persistentCitaPaciente.getIdPaciente();
-            Paciente idPacienteNew = citaPaciente.getIdPaciente();
-            if (idMedicoNew != null) {
-                idMedicoNew = em.getReference(idMedicoNew.getClass(), idMedicoNew.getIdMedico());
-                citaPaciente.setIdMedico(idMedicoNew);
-            }
-            if (idPacienteNew != null) {
-                idPacienteNew = em.getReference(idPacienteNew.getClass(), idPacienteNew.getIdPaciente());
-                citaPaciente.setIdPaciente(idPacienteNew);
-            }
             citaPaciente = em.merge(citaPaciente);
-            if (idMedicoOld != null && !idMedicoOld.equals(idMedicoNew)) {
-                idMedicoOld.getCitaPacienteList().remove(citaPaciente);
-                idMedicoOld = em.merge(idMedicoOld);
-            }
-            if (idMedicoNew != null && !idMedicoNew.equals(idMedicoOld)) {
-                idMedicoNew.getCitaPacienteList().add(citaPaciente);
-                idMedicoNew = em.merge(idMedicoNew);
-            }
-            if (idPacienteOld != null && !idPacienteOld.equals(idPacienteNew)) {
-                idPacienteOld.getCitaPacienteList().remove(citaPaciente);
-                idPacienteOld = em.merge(idPacienteOld);
-            }
-            if (idPacienteNew != null && !idPacienteNew.equals(idPacienteOld)) {
-                idPacienteNew.getCitaPacienteList().add(citaPaciente);
-                idPacienteNew = em.merge(idPacienteNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -134,16 +85,6 @@ public class CitaPacienteJpaController implements Serializable {
                 citaPaciente.getIdCita();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The citaPaciente with id " + id + " no longer exists.", enfe);
-            }
-            Medico idMedico = citaPaciente.getIdMedico();
-            if (idMedico != null) {
-                idMedico.getCitaPacienteList().remove(citaPaciente);
-                idMedico = em.merge(idMedico);
-            }
-            Paciente idPaciente = citaPaciente.getIdPaciente();
-            if (idPaciente != null) {
-                idPaciente.getCitaPacienteList().remove(citaPaciente);
-                idPaciente = em.merge(idPaciente);
             }
             em.remove(citaPaciente);
             em.getTransaction().commit();

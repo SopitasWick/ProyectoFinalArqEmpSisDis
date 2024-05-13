@@ -159,7 +159,8 @@ public class ConsultaJpaController implements Serializable {
             }
         }
     }
-
+// USAR ESTE Y LUEGO UN FOR EACH PARA VALIDAR POR ID
+    //LLAMAR EL METODO COUNT Y LO QUE DE MAS 1 ES EL ID DE LA CONSULTA
     public List<Consulta> findConsultaEntities() {
         return findConsultaEntities(true, -1, -1);
     }

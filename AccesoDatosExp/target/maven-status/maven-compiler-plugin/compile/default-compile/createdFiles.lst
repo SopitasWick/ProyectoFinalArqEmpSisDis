@@ -4,7 +4,6 @@ entidades\Consulta.class
 jpaControllers\exceptions\IllegalOrphanException.class
 jpaControllers\ConsultaJpaController.class
 jpaControllers\exceptions\PreexistingEntityException.class
-jpaControllers\ExpedientePacienteJpaController.class
 jpaControllers\exceptions\NonexistentEntityException.class
 entidades\Consulta_.class
 com\itson\edu\mx\accesodatosexp\AccesoDatosExp.class

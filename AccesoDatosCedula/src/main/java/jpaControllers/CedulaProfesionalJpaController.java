@@ -32,93 +32,6 @@ public class CedulaProfesionalJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(CedulaProfesional cedulaProfesional) throws PreexistingEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.persist(cedulaProfesional);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findCedulaProfesional(cedulaProfesional.getIdCedulaProfesional()) != null) {
-                throw new PreexistingEntityException("CedulaProfesional " + cedulaProfesional + " already exists.", ex);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public void edit(CedulaProfesional cedulaProfesional) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            cedulaProfesional = em.merge(cedulaProfesional);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                Integer id = cedulaProfesional.getIdCedulaProfesional();
-                if (findCedulaProfesional(id) == null) {
-                    throw new NonexistentEntityException("The cedulaProfesional with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public void destroy(Integer id) throws NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            CedulaProfesional cedulaProfesional;
-            try {
-                cedulaProfesional = em.getReference(CedulaProfesional.class, id);
-                cedulaProfesional.getIdCedulaProfesional();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The cedulaProfesional with id " + id + " no longer exists.", enfe);
-            }
-            em.remove(cedulaProfesional);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public List<CedulaProfesional> findCedulaProfesionalEntities() {
-        return findCedulaProfesionalEntities(true, -1, -1);
-    }
-
-    public List<CedulaProfesional> findCedulaProfesionalEntities(int maxResults, int firstResult) {
-        return findCedulaProfesionalEntities(false, maxResults, firstResult);
-    }
-
-    private List<CedulaProfesional> findCedulaProfesionalEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(CedulaProfesional.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            em.close();
-        }
-    }
-
     public CedulaProfesional findCedulaProfesional(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -127,18 +40,4 @@ public class CedulaProfesionalJpaController implements Serializable {
             em.close();
         }
     }
-
-    public int getCedulaProfesionalCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<CedulaProfesional> rt = cq.from(CedulaProfesional.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
-    }
-    
 }

@@ -33,6 +33,9 @@ public class Consulta implements Serializable {
     @Column(name = "idConsulta", nullable = false)
     private Integer idConsulta;
     @Basic(optional = false)
+    @Column(name = "idExpediente", nullable = false)
+    private Integer idExpediente;
+    @Basic(optional = false)
     @Column(name = "sintomas", nullable = false, length = 200)
     private String sintomas;
     @Basic(optional = false)
@@ -51,8 +54,9 @@ public class Consulta implements Serializable {
         this.idConsulta = idConsulta;
     }
 
-    public Consulta(Integer idConsulta, String sintomas, String diagnostico, String receta) {
+    public Consulta(Integer idConsulta,Integer idExpediente, String sintomas, String diagnostico, String receta) {
         this.idConsulta = idConsulta;
+        this.idExpediente = idExpediente;
         this.sintomas = sintomas;
         this.diagnostico = diagnostico;
         this.receta = receta;
@@ -96,6 +100,14 @@ public class Consulta implements Serializable {
 
     public void setExpedientePacienteList(List<ExpedientePaciente> expedientePacienteList) {
         this.expedientePacienteList = expedientePacienteList;
+    }
+
+    public Integer getIdExpediente() {
+        return idExpediente;
+    }
+
+    public void setIdExpediente(Integer idExpediente) {
+        this.idExpediente = idExpediente;
     }
 
     @Override

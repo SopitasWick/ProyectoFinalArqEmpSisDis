@@ -38,12 +38,6 @@ public class CitaPaciente implements Serializable {
     @Column(name = "fecha", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @JoinColumn(name = "idMedico", referencedColumnName = "idMedico", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Medico idMedico;
-    @JoinColumn(name = "id_paciente", referencedColumnName = "idPaciente", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Paciente idPaciente;
 
     public CitaPaciente() {
     }
@@ -71,22 +65,6 @@ public class CitaPaciente implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public Medico getIdMedico() {
-        return idMedico;
-    }
-
-    public void setIdMedico(Medico idMedico) {
-        this.idMedico = idMedico;
-    }
-
-    public Paciente getIdPaciente() {
-        return idPaciente;
-    }
-
-    public void setIdPaciente(Paciente idPaciente) {
-        this.idPaciente = idPaciente;
     }
 
     @Override

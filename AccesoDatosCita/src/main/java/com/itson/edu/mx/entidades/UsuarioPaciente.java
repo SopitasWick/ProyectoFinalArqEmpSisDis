@@ -37,9 +37,6 @@ public class UsuarioPaciente implements Serializable {
     @Basic(optional = false)
     @Column(name = "password", nullable = false, length = 45)
     private String password;
-    @JoinColumn(name = "idPaciente", referencedColumnName = "idPaciente", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Paciente idPaciente;
 
     public UsuarioPaciente() {
     }
@@ -76,14 +73,6 @@ public class UsuarioPaciente implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Paciente getIdPaciente() {
-        return idPaciente;
-    }
-
-    public void setIdPaciente(Paciente idPaciente) {
-        this.idPaciente = idPaciente;
     }
 
     @Override

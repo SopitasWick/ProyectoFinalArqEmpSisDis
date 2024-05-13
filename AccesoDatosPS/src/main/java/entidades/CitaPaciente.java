@@ -35,13 +35,6 @@ public class CitaPaciente implements Serializable {
     @Column(name = "id_cita", nullable = false)
     private int idCita;
     @Basic(optional = false)
-    @Column(name = "fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
-    @Basic(optional = false)
-    @Column(name = "id_paciente", nullable = false)
-    private int idPaciente;
-    @Basic(optional = false)
     @Column(name = "id_medico", nullable = false)
     private int idMedico;
 
@@ -52,11 +45,9 @@ public class CitaPaciente implements Serializable {
         this.idPacientecita = idPacientecita;
     }
 
-    public CitaPaciente(Integer idPacientecita, int idCita, Date fecha, int idPaciente, int idMedico) {
+    public CitaPaciente(Integer idPacientecita, int idCita,int idMedico) {
         this.idPacientecita = idPacientecita;
         this.idCita = idCita;
-        this.fecha = fecha;
-        this.idPaciente = idPaciente;
         this.idMedico = idMedico;
     }
 
@@ -74,22 +65,6 @@ public class CitaPaciente implements Serializable {
 
     public void setIdCita(int idCita) {
         this.idCita = idCita;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getIdPaciente() {
-        return idPaciente;
-    }
-
-    public void setIdPaciente(int idPaciente) {
-        this.idPaciente = idPaciente;
     }
 
     public int getIdMedico() {

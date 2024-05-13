@@ -4,7 +4,7 @@
 
 package com.itson.edu.mx.accesodatosps;
 
-import jpaControllers.CitaPacienteJpaController;
+//import jpaControllers.CitaPacienteJpaController;
 
 /**
  *

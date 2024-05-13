@@ -4,17 +4,16 @@
  */
 package jpaControllers;
 
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import com.itson.edu.mx.entidades.Paciente;
 import com.itson.edu.mx.entidades.UsuarioPaciente;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import jpaControllers.exceptions.NonexistentEntityException;
 import jpaControllers.exceptions.PreexistingEntityException;
 
@@ -25,7 +24,7 @@ import jpaControllers.exceptions.PreexistingEntityException;
 public class UsuarioPacienteJpaController implements Serializable {
 
     public UsuarioPacienteJpaController() {
-        this.emf=Persistence.createEntityManagerFactory("sistemaCitaPU");
+          this.emf=Persistence.createEntityManagerFactory("sistemaCitaPU");
     }
     private EntityManagerFactory emf = null;
 
@@ -38,16 +37,7 @@ public class UsuarioPacienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Paciente idPaciente = usuarioPaciente.getIdPaciente();
-            if (idPaciente != null) {
-                idPaciente = em.getReference(idPaciente.getClass(), idPaciente.getIdPaciente());
-                usuarioPaciente.setIdPaciente(idPaciente);
-            }
             em.persist(usuarioPaciente);
-            if (idPaciente != null) {
-                idPaciente.getUsuarioPacienteList().add(usuarioPaciente);
-                idPaciente = em.merge(idPaciente);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findUsuarioPaciente(usuarioPaciente.getIdUsuarioPaciente()) != null) {
@@ -66,22 +56,7 @@ public class UsuarioPacienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            UsuarioPaciente persistentUsuarioPaciente = em.find(UsuarioPaciente.class, usuarioPaciente.getIdUsuarioPaciente());
-            Paciente idPacienteOld = persistentUsuarioPaciente.getIdPaciente();
-            Paciente idPacienteNew = usuarioPaciente.getIdPaciente();
-            if (idPacienteNew != null) {
-                idPacienteNew = em.getReference(idPacienteNew.getClass(), idPacienteNew.getIdPaciente());
-                usuarioPaciente.setIdPaciente(idPacienteNew);
-            }
             usuarioPaciente = em.merge(usuarioPaciente);
-            if (idPacienteOld != null && !idPacienteOld.equals(idPacienteNew)) {
-                idPacienteOld.getUsuarioPacienteList().remove(usuarioPaciente);
-                idPacienteOld = em.merge(idPacienteOld);
-            }
-            if (idPacienteNew != null && !idPacienteNew.equals(idPacienteOld)) {
-                idPacienteNew.getUsuarioPacienteList().add(usuarioPaciente);
-                idPacienteNew = em.merge(idPacienteNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -111,11 +86,6 @@ public class UsuarioPacienteJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuarioPaciente with id " + id + " no longer exists.", enfe);
             }
-            Paciente idPaciente = usuarioPaciente.getIdPaciente();
-            if (idPaciente != null) {
-                idPaciente.getUsuarioPacienteList().remove(usuarioPaciente);
-                idPaciente = em.merge(idPaciente);
-            }
             em.remove(usuarioPaciente);
             em.getTransaction().commit();
         } finally {
@@ -124,7 +94,7 @@ public class UsuarioPacienteJpaController implements Serializable {
             }
         }
     }
-
+//VAMOS A TENER UN USUARIO PARA MEDICO Y OTRO PARA EL PACIENTE
     public List<UsuarioPaciente> findUsuarioPacienteEntities() {
         return findUsuarioPacienteEntities(true, -1, -1);
     }
