@@ -4,7 +4,7 @@
  */
 package jpaControllers;
 
-import com.itson.edu.mx.entidades.UsuarioPaciente;
+import com.itson.edu.mx.entidades.Cita;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,10 +21,10 @@ import jpaControllers.exceptions.PreexistingEntityException;
  *
  * @author DELL
  */
-public class UsuarioPacienteJpaController implements Serializable {
+public class CitaJpaController implements Serializable {
 
-    public UsuarioPacienteJpaController() {
-          this.emf=Persistence.createEntityManagerFactory("sistemaCitaPU");
+    public CitaJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("sistemaCitaPU");
     }
     private EntityManagerFactory emf = null;
 
@@ -32,16 +32,16 @@ public class UsuarioPacienteJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(UsuarioPaciente usuarioPaciente) throws PreexistingEntityException, Exception {
+    public void create(Cita cita) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(usuarioPaciente);
+            em.persist(cita);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findUsuarioPaciente(usuarioPaciente.getIdUsuarioPaciente()) != null) {
-                throw new PreexistingEntityException("UsuarioPaciente " + usuarioPaciente + " already exists.", ex);
+            if (findCita(cita.getIdcita()) != null) {
+                throw new PreexistingEntityException("Cita " + cita + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -51,19 +51,19 @@ public class UsuarioPacienteJpaController implements Serializable {
         }
     }
 
-    public void edit(UsuarioPaciente usuarioPaciente) throws NonexistentEntityException, Exception {
+    public void edit(Cita cita) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            usuarioPaciente = em.merge(usuarioPaciente);
+            cita = em.merge(cita);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = usuarioPaciente.getIdUsuarioPaciente();
-                if (findUsuarioPaciente(id) == null) {
-                    throw new NonexistentEntityException("The usuarioPaciente with id " + id + " no longer exists.");
+                Integer id = cita.getIdcita();
+                if (findCita(id) == null) {
+                    throw new NonexistentEntityException("The cita with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -79,14 +79,14 @@ public class UsuarioPacienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            UsuarioPaciente usuarioPaciente;
+            Cita cita;
             try {
-                usuarioPaciente = em.getReference(UsuarioPaciente.class, id);
-                usuarioPaciente.getIdUsuarioPaciente();
+                cita = em.getReference(Cita.class, id);
+                cita.getIdcita();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The usuarioPaciente with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The cita with id " + id + " no longer exists.", enfe);
             }
-            em.remove(usuarioPaciente);
+            em.remove(cita);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,20 +94,20 @@ public class UsuarioPacienteJpaController implements Serializable {
             }
         }
     }
-//VAMOS A TENER UN USUARIO PARA MEDICO Y OTRO PARA EL PACIENTE
-    public List<UsuarioPaciente> findUsuarioPacienteEntities() {
-        return findUsuarioPacienteEntities(true, -1, -1);
+
+    public List<Cita> findCitaEntities() {
+        return findCitaEntities(true, -1, -1);
     }
 
-    public List<UsuarioPaciente> findUsuarioPacienteEntities(int maxResults, int firstResult) {
-        return findUsuarioPacienteEntities(false, maxResults, firstResult);
+    public List<Cita> findCitaEntities(int maxResults, int firstResult) {
+        return findCitaEntities(false, maxResults, firstResult);
     }
 
-    private List<UsuarioPaciente> findUsuarioPacienteEntities(boolean all, int maxResults, int firstResult) {
+    private List<Cita> findCitaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(UsuarioPaciente.class));
+            cq.select(cq.from(Cita.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,20 +119,20 @@ public class UsuarioPacienteJpaController implements Serializable {
         }
     }
 
-    public UsuarioPaciente findUsuarioPaciente(Integer id) {
+    public Cita findCita(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(UsuarioPaciente.class, id);
+            return em.find(Cita.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getUsuarioPacienteCount() {
+    public int getCitaCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<UsuarioPaciente> rt = cq.from(UsuarioPaciente.class);
+            Root<Cita> rt = cq.from(Cita.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

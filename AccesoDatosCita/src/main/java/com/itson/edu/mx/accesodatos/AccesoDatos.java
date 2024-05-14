@@ -4,10 +4,10 @@
 
 package com.itson.edu.mx.accesodatos;
 
-import com.itson.edu.mx.entidades.Paciente;
+//import com.itson.edu.mx.entidades.Paciente;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jpaControllers.PacienteJpaController;
+//import jpaControllers.PacienteJpaController;
 import pruebasJPA.pruebas;
 
 /**
