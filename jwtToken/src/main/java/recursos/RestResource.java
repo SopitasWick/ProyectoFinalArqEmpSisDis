@@ -1,5 +1,6 @@
 package recursos;
 
+import busEventos.PublicarEvento;
 import filtro.AuthenticationFilter;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.security.RolesAllowed;
@@ -31,6 +32,26 @@ public class RestResource {
         if (AuthenticationFilter.isValidToken(token)) {
             // El token es válido, procede a obtener los datos del recurso
             // Aquí iría la lógica para obtener el recurso solicitado
+            return Response.ok("{\"message\": \"Recursos obtenidos exitosamente\"}").build();
+        } else {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("{\"message\": \"Token inválido\"}")
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    @POST
+    @Path("evento")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("user")
+    public Response setRecurso(@Context HttpHeaders headers, String data) {
+        String token = getTokenFromHeaders(headers);
+        if (AuthenticationFilter.isValidToken(token)) {
+            try {
+                PublicarEvento.main(new String[]{data});
+            } catch (Exception e) {
+            }
             return Response.ok("{\"message\": \"Recursos obtenidos exitosamente\"}").build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED)
@@ -97,7 +118,7 @@ public class RestResource {
     private String getTokenFromHeaders(HttpHeaders headers) {
         String token = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
         if (token != null && token.startsWith("Bearer ")) {
-            return token.substring(7); 
+            return token.substring(7);
         }
         return null;
     }
