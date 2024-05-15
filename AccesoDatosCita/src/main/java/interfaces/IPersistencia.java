@@ -7,7 +7,6 @@ package interfaces;
 import SistemaCitas.Cita;
 import SistemaCitas.MedicoUsuario;
 import SistemaCitas.PacienteUsuario;
-import java.util.Date;
 import tablasBd.CitaTabla;
 import tablasBd.MedicoUsuarioTabla;
 import tablasBd.PacienteUsuarioTabla;

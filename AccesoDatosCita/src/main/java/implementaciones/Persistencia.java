@@ -8,7 +8,6 @@ import SistemaCitas.Cita;
 import SistemaCitas.MedicoUsuario;
 import SistemaCitas.PacienteUsuario;
 import interfaces.IPersistencia;
-import java.util.Date;
 import tablasBd.CitaTabla;
 import tablasBd.MedicoUsuarioTabla;
 import tablasBd.PacienteUsuarioTabla;
@@ -18,9 +17,9 @@ import tablasBd.PacienteUsuarioTabla;
  * @author DELL
  */
 public class Persistencia implements IPersistencia{
-protected PacienteUsuarioTabla singlentonUsuarioPTabla;
-protected MedicoUsuarioTabla singlentonUsuarioMTabla;
-protected CitaTabla singlentonCitaTabla;
+private PacienteUsuarioTabla singlentonUsuarioPTabla;
+private MedicoUsuarioTabla singlentonUsuarioMTabla;
+private CitaTabla singlentonCitaTabla;
 
     public Persistencia() {
       this.singlentonUsuarioPTabla = PacienteUsuarioTabla.getInstance();
@@ -28,15 +27,15 @@ protected CitaTabla singlentonCitaTabla;
       this.singlentonCitaTabla = CitaTabla.getInstance();
     }
 
-    public PacienteUsuarioTabla getSinglentonUsuarioPTabla() {
+    private PacienteUsuarioTabla getSinglentonUsuarioPTabla() {
         return singlentonUsuarioPTabla;
     }
 
-    public MedicoUsuarioTabla getSinglentonUsuarioMTabla() {
+    private MedicoUsuarioTabla getSinglentonUsuarioMTabla() {
         return singlentonUsuarioMTabla;
     }
 
-    public CitaTabla getSinglentonCitaTabla() {
+    private CitaTabla getSinglentonCitaTabla() {
         return singlentonCitaTabla;
     }
 

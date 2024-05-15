@@ -10,7 +10,7 @@ package com.itson.edu.mx.accesodatoscita;
  */
 public class AccesoDatosCita {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+//    public static void main(String[] args) {
+//        System.out.println("Hello World!");
+//    }
 }
