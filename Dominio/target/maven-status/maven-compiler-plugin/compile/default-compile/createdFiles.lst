@@ -1,0 +1,8 @@
+SistemaCedula\MedicoCedula.class
+SistemaAutenticacionPaciente\AutenticacionPaciente.class
+SistemaCitas\Cita.class
+SistemaCitas\PacienteUsuario.class
+SistemaExpediente\Consulta.class
+SistemaCitas\MedicoUsuario.class
+SistemaAutenticacionMedico\AutenticacionMedico.class
+SistemaExpediente\ExpedientePaciente.class
