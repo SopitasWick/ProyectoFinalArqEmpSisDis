@@ -6,7 +6,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>jwtToken</name>
-    
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -14,7 +13,6 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>9.1.0</jakartaee>
     </properties>
-    
     <dependencies>
         <dependency>
             <groupId>jakarta.persistence</groupId>
@@ -27,7 +25,6 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- JSON Web Token (JWT) -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -94,12 +91,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.2</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20240303</version>
@@ -129,6 +120,11 @@
             <artifactId>jakarta.servlet-api</artifactId>
             <version>5.0.0</version> <!-- O la versión adecuada -->
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.itson.edu.mx</groupId>
+            <artifactId>Dominio</artifactId>
+            <version>1.0-PRUEBACONCEPTO-DOMINIO</version>
         </dependency>
     </dependencies>
     

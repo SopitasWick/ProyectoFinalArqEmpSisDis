@@ -30,7 +30,6 @@ public class notificacionAcceso {
     }
 
     private static boolean verificarFechaBaseDatos() {
-        
         // Implementación temporal: siempre retornar true
         return true;
     }

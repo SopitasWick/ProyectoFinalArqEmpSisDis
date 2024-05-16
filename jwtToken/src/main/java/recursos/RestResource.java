@@ -2,7 +2,6 @@ package recursos;
 
 import busEventos.PublicarEvento;
 import filtro.AuthenticationFilter;
-import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -14,14 +13,9 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.security.Key;
-import modelos.LoginRequest;
-import jwt.TokenResponse;
 
 @Path("api")
 public class RestResource {
-
-    private static final Key key = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
 
     @GET
     @Path("recurso")
@@ -49,7 +43,7 @@ public class RestResource {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
             try {
-                PublicarEvento.main(new String[]{data});
+                PublicarEvento.publicarEvento(data);
             } catch (Exception e) {
             }
             return Response.ok("{\"message\": \"Recursos obtenidos exitosamente\"}").build();

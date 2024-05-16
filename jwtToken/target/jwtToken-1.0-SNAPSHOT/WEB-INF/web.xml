@@ -8,9 +8,7 @@
             30
         </session-timeout>
     </session-config>
-    <servlet>
-        <servlet-name>consumidor</servlet-name>
-        <servlet-class>busEventos.ConsumidorServletContextListener</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <listener>
+        <listener-class>busEventos.ConsumidorServletContextListener</listener-class>
+    </listener>
 </web-app>

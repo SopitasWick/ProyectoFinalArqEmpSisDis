@@ -1,12 +1,11 @@
-busEventos\Consumidor2.class
 filtro\AuthenticationFilter.class
 busEventos\Consumidor.class
 tareaProgramada\notificacionAcceso$1.class
 busEventos\ConsumidorServletContextListener.class
 busEventos\PublicarEvento.class
+busEventos\Consumidor$1.class
 tareaProgramada\notificacionAcceso.class
 modelos\LoginRequest.class
-busEventos\Consumidor2$1.class
 recursos\LoginRecurso.class
 recursos\RestResource.class
 jwt\TokenResponse.class
