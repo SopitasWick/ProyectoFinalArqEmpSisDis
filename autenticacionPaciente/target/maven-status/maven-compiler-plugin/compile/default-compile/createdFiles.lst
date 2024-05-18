@@ -1,9 +1,8 @@
 cors\CORSFilter.class
 filtro\AuthenticationFilter.class
-busEventos\Consumidor.class
+colaMensajes\Consumer.class
+colaMensajes\Producer.class
 busEventos\ConsumidorServletContextListener.class
-busEventos\PublicarEvento.class
-busEventos\Consumidor$1.class
+colaMensajes\pruebaCita.class
 recursos\RestAutenticacionPaciente.class
 jwt\TokenResponse.class
-busEventos\pruebasCrearJsonObjeto.class

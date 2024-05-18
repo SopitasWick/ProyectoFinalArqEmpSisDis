@@ -1,5 +1,6 @@
 //package busEventos;
 //
+//import colaMensajes.Consumer;
 //import jakarta.servlet.ServletContextEvent;
 //import jakarta.servlet.ServletContextListener;
 //import jakarta.servlet.annotation.WebListener;
@@ -22,7 +23,7 @@
 //        executor = Executors.newFixedThreadPool(5); // Pool de 5 hilos
 //        executor.submit(() -> {
 //            try {
-//                Consumidor.main(new String[]{});
+//                Consumer.main(new String[]{});
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }

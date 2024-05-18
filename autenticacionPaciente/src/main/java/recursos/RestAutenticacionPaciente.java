@@ -1,6 +1,6 @@
 package recursos;
 
-import busEventos.PublicarEvento;
+import colaMensajes.Producer;
 import filtro.AuthenticationFilter;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.DELETE;
@@ -43,7 +43,7 @@ public class RestAutenticacionPaciente {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
             try {
-                PublicarEvento.publicarEvento(data);
+                Producer.publicarCola(data);
             } catch (Exception e) {
             }
             return Response.ok("{\"message\": \"Recursos obtenidos exitosamente\"}").build();
