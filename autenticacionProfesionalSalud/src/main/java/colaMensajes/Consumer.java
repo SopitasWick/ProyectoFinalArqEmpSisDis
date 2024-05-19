@@ -2,6 +2,8 @@ package colaMensajes;
 
 import SistemaAutenticacionPaciente.AutenticacionPaciente;
 import SistemaCitas.Cita;
+import cifrado.CifradoInformacionSin;
+import cifrado.ICifrado;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -13,7 +15,7 @@ import java.util.concurrent.Executors;
 import org.json.JSONObject;
 
 public class Consumer {
-
+    private static final ICifrado cifrado = CifradoInformacionSin.getInstance();
     private static String QUEUE = "autenticacionPaciente";
 
     public static void main(String[] args) throws Exception {
@@ -31,7 +33,7 @@ public class Consumer {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println("Received '" + message + "'");
 
-            JSONObject json = new JSONObject(message);
+            JSONObject json = new JSONObject(cifrado.descifrarMensaje(message));
             int idCita = json.getInt("idCita");
             JSONObject fechaCitaJson = json.getJSONObject("fechaCita");
             int year = fechaCitaJson.getInt("year");
