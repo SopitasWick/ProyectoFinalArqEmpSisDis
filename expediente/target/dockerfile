@@ -1,0 +1,4 @@
+from tomee 
+
+COPY ./expediente-1.0-SNAPSHOT.war /usr/local/tomee/webapps/expediente-1.0-SNAPSHOT.war 
+CMD ["catalina.sh", "run"]

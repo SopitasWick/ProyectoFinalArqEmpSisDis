@@ -1,0 +1,30 @@
+version: "3.3"
+
+services: 
+  frontend:
+    build: ./frontEnd/target/
+    ports: 
+      - 8081:8080
+  expediente:
+    build: ./expediente/target/
+    ports:
+      - 8084:8080
+  cita:
+    build: ./cita/target/
+    ports:
+      - 8080:8080
+  autenticacionprofesionalsalud:
+    build: ./autenticacionprofesionalsalud/target/
+    ports:
+      - 8083:8080
+  autenticacionpaciente:
+    build: ./autenticacionPaciente/target/
+    ports:
+      - 8082:8080
+
+  rabbit:
+    image: rabbitmq
+    ports: 
+      - 5672:5672
+      - 15672:15672 
+

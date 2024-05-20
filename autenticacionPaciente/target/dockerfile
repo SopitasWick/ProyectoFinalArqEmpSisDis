@@ -1,0 +1,4 @@
+from tomee 
+
+COPY ./autenticacionPaciente-1.0-SNAPSHOT.war /usr/local/tomee/webapps/autenticacionPaciente-1.0-SNAPSHOT.war
+CMD ["catalina.sh", "run"]

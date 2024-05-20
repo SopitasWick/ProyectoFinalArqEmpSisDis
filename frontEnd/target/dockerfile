@@ -1,0 +1,4 @@
+from tomee 
+
+COPY ./frontEnd-1.0-SNAPSHOT.war /usr/local/tomee/webapps/frontEnd-1.0-SNAPSHOT.war 
+CMD ["catalina.sh", "run"]
