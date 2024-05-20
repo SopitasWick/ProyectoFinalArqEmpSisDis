@@ -13,14 +13,16 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import interfaces.IRestExpediente;
 
 @Path("api")
-public class RestResource {
+public class RestExpediente implements IRestExpediente {
 
     @GET
-    @Path("/recurso/autenticacionProfesional")
+    @Path("/recurso/expediente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response getRecurso(@Context HttpHeaders headers) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
@@ -36,9 +38,10 @@ public class RestResource {
     }
 
     @POST
-    @Path("/evento/autenticacionProfesional")
+    @Path("/evento/expediente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response setRecurso(@Context HttpHeaders headers, String data) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
@@ -56,9 +59,10 @@ public class RestResource {
     }
 
     @POST
-    @Path("/recurso/autenticacionProfesional")
+    @Path("/recurso/expediente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response setRecurso(@Context HttpHeaders headers) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
@@ -74,9 +78,10 @@ public class RestResource {
     }
 
     @PUT
-    @Path("/recurso/autenticacionProfesional")
+    @Path("/recurso/expediente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response updateRecurso(@Context HttpHeaders headers) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
@@ -92,9 +97,10 @@ public class RestResource {
     }
 
     @DELETE
-    @Path("/recurso/autenticacionProfesional")
+    @Path("/recurso/expediente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response deleteRecurso(@Context HttpHeaders headers) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
