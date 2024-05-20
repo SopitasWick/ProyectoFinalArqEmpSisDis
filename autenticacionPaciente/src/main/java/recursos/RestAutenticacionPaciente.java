@@ -2,6 +2,7 @@ package recursos;
 
 import colaMensajes.Producer;
 import filtro.AuthenticationFilter;
+import interfaces.IRestAutenticacionPaciente;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,12 +16,13 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("api")
-public class RestAutenticacionPaciente {
+public class RestAutenticacionPaciente implements IRestAutenticacionPaciente{
 
     @GET
     @Path("/recurso/autenticacionPaciente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response getRecurso(@Context HttpHeaders headers) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
@@ -39,6 +41,7 @@ public class RestAutenticacionPaciente {
     @Path("/evento/autenticacionPaciente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response setRecurso(@Context HttpHeaders headers, String data) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
@@ -59,6 +62,7 @@ public class RestAutenticacionPaciente {
     @Path("/recurso/autenticacionPaciente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response setRecurso(@Context HttpHeaders headers) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
@@ -77,6 +81,7 @@ public class RestAutenticacionPaciente {
     @Path("/recurso/autenticacionPaciente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response updateRecurso(@Context HttpHeaders headers) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {
@@ -95,6 +100,7 @@ public class RestAutenticacionPaciente {
     @Path("/recurso/autenticacionPaciente")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
+    @Override
     public Response deleteRecurso(@Context HttpHeaders headers) {
         String token = getTokenFromHeaders(headers);
         if (AuthenticationFilter.isValidToken(token)) {

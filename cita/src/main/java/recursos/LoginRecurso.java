@@ -1,5 +1,6 @@
 package recursos;
 
+import interfaces.ILoginRecurso;
 import jwt.TokenResponse;
 import jakarta.annotation.security.PermitAll;
 import jakarta.ws.rs.Consumes;
@@ -12,13 +13,14 @@ import modelos.LoginRequest;
 import tareaProgramada.notificacionAcceso;
 
 @Path("login")
-public class LoginRecurso {
+public class LoginRecurso implements ILoginRecurso{
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @PermitAll
-    public Response login(LoginRequest loginRequest) {
+    @Override
+    public Response login(LoginRequest loginRequest){
         System.out.println(loginRequest);
         if (isValidCredentials(loginRequest.getUsername(), loginRequest.getPassword())) {
             String token = TokenResponse.generateToken(loginRequest.getUsername());
