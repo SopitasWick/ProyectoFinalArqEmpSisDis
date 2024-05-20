@@ -37,7 +37,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         }
     }
 
-    public  String getTokenFromHeaders(String authorizationHeader) {
+    public String getTokenFromHeaders(String authorizationHeader) {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             return authorizationHeader.substring(7); // Elimina el prefijo "Bearer "
         }
